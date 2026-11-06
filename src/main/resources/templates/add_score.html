@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"><title>Add Score</title>
+  <style>body{font-family:Arial;margin:50px;} form{width:300px;} div{margin-bottom:10px;} label{display:block;} select, input{width:100%;padding:8px;}</style>
+</head>
+<body>
+<h2>Add New Score</h2>
+<form th:action="@{/scores/save}" th:object="${scoreObj}" method="post">
+  <div>
+    <label>Student:</label>
+    <select th:field="*{student.studentId}">
+      <option th:each="s : ${students}" th:value="${s.studentId}" th:text="${s.fullName} + ' (' + ${s.studentCode} + ')'"></option>
+    </select>
+  </div>
+  <div>
+    <label>Subject:</label>
+    <select th:field="*{subject.subjectId}">
+      <option th:each="sub : ${subjects}" th:value="${sub.subjectId}" th:text="${sub.subjectName}"></option>
+    </select>
+  </div>
+  <div><label>Score 1:</label><input type="number" step="0.1" th:field="*{score1}" required/></div>
+  <div><label>Score 2:</label><input type="number" step="0.1" th:field="*{score2}" required/></div>
+  <button type="submit">Save Score</button>
+</form>
+</body>
+</html>

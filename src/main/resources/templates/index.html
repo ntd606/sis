@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Information System (SIS)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        h2 { text-align: center; color: #333; }
+        .header-bar { background-color: #386641; color: white; padding: 10px 20px; font-size: 20px; font-weight: bold; border-radius: 4px; margin-bottom: 20px; }
+        .btn-container { margin-bottom: 15px; }
+        .btn { background-color: #43aa8b; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; margin-right: 10px; }
+        .btn:hover { background-color: #2d6a4f; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 5px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #386641; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+    </style>
+</head>
+<body>
+
+<div class="header-bar">Student Information System</div>
+
+<h2>Student Information</h2>
+
+<div class="btn-container">
+    <a th:href="@{/students/new}" class="btn">+ Student</a>
+    <a th:href="@{/scores/new}" class="btn">+ Score</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Student Id</th>
+        <th>Student Name</th>
+        <th>Subject Name</th>
+        <th>Score 1</th>
+        <th>Score 2</th>
+        <th>Credit</th>
+        <th>Grade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="score : ${listScores}">
+        <td th:text="${score.studentScoreId}">1</td>
+        <td th:text="${score.student.studentCode}">2007A1</td>
+        <td th:text="${score.student.fullName}">Nguyen Van A</td>
+        <td th:text="${score.subject.subjectName}">JAVA</td>
+        <td th:text="${score.score1}">8.0</td>
+        <td th:text="${score.score2}">8.0</td>
+        <td th:text="${score.subject.credit}">3</td>
+        <td th:text="${studentService.calculateGrade(score.score1, score.score2)}">A</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
